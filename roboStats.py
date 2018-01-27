@@ -1,0 +1,73 @@
+"""
+    Name: Anna Murphy
+    File: roboStats.py
+    Date: 27/1/2018
+
+    This is the class for the
+    robot emotional stats.
+    Happiness, hunger, and
+    discipline are the core ones.
+    Additionally, there are sickness,
+    and age. Sickness increses as a
+    function of time infected,
+    and age has specific incrememnts. 
+    
+"""
+
+import random
+
+class roboStats:
+
+    hunger = 0
+    happiness = 0
+    discipline = 0
+    sickness = 0
+    age = 0
+
+    def __init__(self):        
+        self.hunger = random.randint(0,100)
+        self.happiness = random.randint(0, 100)
+        self.discipline = random.randint(0, 100)
+
+    def updateHappiness(self, modify):
+        self.happiness += modify
+        if modify < 0:
+            self.discipline -= (modify/2)
+        else:
+            self.discipline += (modify/2)
+
+    def updateHungerFeed(self, food):
+        self.hunger += food
+        self.happiness += (food/2)
+
+    def updateSickness(self, med):
+        if self.sickness <= 0:
+            self.discipline -= (med/2)
+        self.sickness += med
+        self.happiness -= (med/2)
+
+    def updateDiscipline(self):
+        direction = random.randint(1, 2)
+        amount = random.randint(1, 20)
+        if direction == 1:
+            self.discipline += amount
+        else:
+            self.discipline -= amount
+
+    def updateAge(self):
+        curAge = self.age
+        self.age += 1
+        #Baby, Child, Teenager, Adult, Senior
+        if age > 5:
+            #Robot dies
+            pass
+    
+            
+
+def main():
+    robo = roboStats()
+    print("Hunger: ", robo.hunger)
+    print("Discipline: ", robo.discipline)
+    robo.updateDiscipline()
+    print("Hunger: ", robo.hunger)
+    print("Discipline: ", robo.discipline)
