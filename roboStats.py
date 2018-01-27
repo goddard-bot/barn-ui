@@ -16,7 +16,7 @@
 
 import random
 
-class roboStats:
+class RoboStats:
 
     hunger = 0
     happiness = 0
@@ -29,24 +29,24 @@ class roboStats:
         self.happiness = random.randint(0, 100)
         self.discipline = random.randint(0, 100)
 
-    def updateHappiness(self, modify):
+    def update_happiness(self, modify):
         self.happiness += modify
         if modify < 0:
             self.discipline -= (modify/2)
         else:
             self.discipline += (modify/2)
 
-    def updateHungerFeed(self, food):
+    def update_hungerFeed(self, food):
         self.hunger += food
         self.happiness += (food/2)
 
-    def updateSickness(self, med):
+    def update_sickness(self, med):
         if self.sickness <= 0:
             self.discipline -= (med/2)
         self.sickness += med
         self.happiness -= (med/2)
 
-    def updateDiscipline(self):
+    def update_discipline(self):
         direction = random.randint(1, 2)
         amount = random.randint(1, 20)
         if direction == 1:
@@ -54,7 +54,7 @@ class roboStats:
         else:
             self.discipline -= amount
 
-    def updateAge(self):
+    def update_age(self):
         curAge = self.age
         self.age += 1
         #Baby, Child, Teenager, Adult, Senior
