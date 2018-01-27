@@ -16,3 +16,16 @@
 * discipline
 * sickness
 * age
+
+#### Interactions ####
+* feed - raises happiness and hunger stat
+* give medicine - raise discipline, decrease sickness
+* move
+  * forward
+  * turn
+    * left
+    * right
+  * backward
+* rest  -
+* play game (raises happiness)
+* " " breaks out of the loop (enter twice)
