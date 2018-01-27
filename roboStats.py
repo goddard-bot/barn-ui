@@ -22,7 +22,6 @@ class RoboStats:
     happiness = 0
     discipline = 0
     sickness = 0
-    age = 0
 
     def __init__(self):        
         self.hunger = random.randint(0,100)
@@ -44,7 +43,7 @@ class RoboStats:
         if self.sickness <= 0:
             self.discipline -= (med/2)
         self.sickness += med
-        self.happiness -= (med/2)
+        self.happiness += (med/4)
 
     def update_discipline(self):
         direction = random.randint(1, 2)
@@ -54,20 +53,3 @@ class RoboStats:
         else:
             self.discipline -= amount
 
-    def update_age(self):
-        curAge = self.age
-        self.age += 1
-        #Baby, Child, Teenager, Adult, Senior
-        if age > 5:
-            #Robot dies
-            pass
-    
-            
-
-def main():
-    robo = roboStats()
-    print("Hunger: ", robo.hunger)
-    print("Discipline: ", robo.discipline)
-    robo.updateDiscipline()
-    print("Hunger: ", robo.hunger)
-    print("Discipline: ", robo.discipline)
