@@ -41,9 +41,14 @@ class Robot_Driver():
 
 
 if __name__ == '__main__':
-    drive = Robot_Driver()
+    port = input("Serial Port [/dev/ttyUSB0]: ")
+    if port:
+        drive = Robot_Driver(port)
+    else:
+        drive = Robot_Driver()
+
     while True:
-        command = input("What do you want the robot to do?")
+        command = input("What do you want the robot to do? ")
         command = command.upper()
         if command == "F":
             drive.go_forward('123', 4)
