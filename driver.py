@@ -36,6 +36,9 @@ class Robot_Driver():
     def update_color(self, color):
         self.send("B" + color + "Z")
 
+    def spin(self, color):
+        self.send("B" + color + "S")
+
     def sleep(self, color):
         self.send("B" + color + "L")
 

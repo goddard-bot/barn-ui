@@ -12,7 +12,7 @@ class Emotions:
     boredom = 1
 
     def __init__(self, port='/dev/ttyUSB0'):
-        port = Robot_Driver(port)
+        self.port = Robot_Driver(port)
 
     def calc_friend_score(self):
         sicChance = random.randint(1, 20)
@@ -21,7 +21,7 @@ class Emotions:
         if len(self.history) > 20:
             self.history.pop()
         freqs = Counter(self.history)
-        if max(freqs.values()) > 8:
+        if freqs and max(freqs.values()) > 8:
             self.boredom = 0.5
             self.hap = self.hap / 2
             self.dis = self.dis * 2
@@ -150,7 +150,8 @@ class Emotions:
     def discipline_test(self):
         ran = random.randint(1, 100)
         if ran > self.calc_obed_score():
-            color = self.find_color()
+            fri_val = self.calc_friend_score()
+            color = self.find_color(fri_val)
             self.port.get_mad(color)
             return False
         else:
