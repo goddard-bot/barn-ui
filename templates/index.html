@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>siteTest</title>
+    <title>Goddard UI</title>
      <!-- Latest compiled and minified CSS -->
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -16,6 +16,20 @@
 </head>
 <body>
 
+
+<h1 style="text-align:center;">Goddard</h1>
+<p style="text-align:center;">
+    Friendship: <span id="FriRes">Friendship</span>
+</p>
+<div style="text-align:center;">
+    <a class="btn btn-lg btn-success" href="#" id="feed">Feed</a>
+    <a class="btn btn-lg btn-success" href="#" id="rest">Rest</a>
+    <a class="btn btn-lg btn-success" href="#" id="play">Play</a>
+</div>
+<div style="text-align:center;">
+    <a class="btn btn-lg btn-success" href="#" id="heal">Heal</a>
+    <a class="btn btn-lg btn-success" href="#" id="train">Train</a>
+</div>
 <script type=text/javascript>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
@@ -51,17 +65,6 @@
             action("train")
         });
     });
-
 </script>
-
-<h1>Goddard</h1>
-<p>
-    Friendship: <span id="FriRes">Friendship</span>
-</p>
-<button type="button" id="feed" class="btn btn-lg btn-success"><a href="#" id="feed">Feed</a></button>
-<button type="button" id="rest" class="btn btn-lg btn-success"><a href="#" id="rest">Rest</a></button>
-<button type="button" id="play" class="btn btn-lg btn-success"><a href="#" id="play">Play</a></button>
-<button type="button" id="heal" class="btn btn-lg btn-success"><a href="#" id="heal">Heal</a></button>
-<button type="button" id="train" class="btn btn-lg btn-success"><a href="#" id="train">Train</a></button>
 </body>
 </html>
