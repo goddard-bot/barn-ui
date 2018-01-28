@@ -30,8 +30,8 @@ class Emotions:
         return fri
 
     def calc_obed_score(self):
-        obed = 100 - self.dis
-        return obed
+        obed = ((self.calc_friend_score() + self.dis*2)/650)*95
+        return int(obed)
 
     def mod_hap(self, hap):
         self.hap += hap
