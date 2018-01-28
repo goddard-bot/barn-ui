@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, render_template, request
-import GoddardBot
+from emotions import Emotions
 
 app = Flask(__name__)
 
-app.emotions = GoddardBot.Emotions()
+app.emotions = Emotions()
 
 @app.route('/get_rest')
 def get_rest():
