@@ -75,7 +75,7 @@ class Emotions:
             self.mod_hap(hap_val)
             fri_val = self.mod_dis(dis_val)
             self.history.append("r")
-            color = self.find_color(fri_val)
+            color = self.find_color()
             self.port.sleep(color)
             return fri_val
         else:
@@ -91,7 +91,7 @@ class Emotions:
             self.mod_hap(hap_val)
             fri_val = self.mod_dis(dis_val)
             self.history.append("f")
-            color = self.find_color(fri_val)
+            color = self.find_color()
             self.port.yep(color)
             return fri_val
         else:
@@ -106,7 +106,7 @@ class Emotions:
             self.mod_hun(hun_val)
             fri_val = self.mod_hun(hun_val)
             self.history.append("p")
-            color = self.find_color(fri_val)
+            color = self.find_color()
             self.port.spin(color)
             return fri_val
         else:
@@ -122,7 +122,7 @@ class Emotions:
             self.mod_hun(hun_val)
             fri_val = self.mod_dis(dis_val)
             self.history.append("t")
-            color = self.find_color(fri_val)
+            color = self.find_color()
             if random.randint(1, 2) == 1:
                 self.port.go_forward(color, self.calc_obed_score()//10)
             else:
@@ -141,7 +141,7 @@ class Emotions:
             self.mod_dis(dis_val)
             fri_val = self.mod_hap(hap_val)
             self.history.append("h")
-            color = self.find_color(fri_val)
+            color = self.find_color()
             self.port.yep(color)
             return fri_val
         else:
@@ -150,20 +150,22 @@ class Emotions:
     def discipline_test(self):
         ran = random.randint(1, 100)
         if ran > self.calc_obed_score():
-            fri_val = self.calc_friend_score()
-            color = self.find_color(fri_val)
+            color = self.find_color()
             self.port.get_mad(color)
             return False
         else:
             return True
 
-    def find_color(self, fri_val):
-        if self.hap > 50:
-            greVal = self.hap//7
+    def find_color(self):
+        if self.hap < 50:
+            greVal = 7 - (self.hap//7)
             redVal = 1
         else:
             redVal = (self.hap-50)//7
             greVal = 1
-        blueVal = self.calc_obed_score()//7
+        blueVal = self.calc_obed_score()//10
+        if redVal  > 9: redVal  = 9
+        if greVal  > 9: greVal  = 9
+        if blueVal > 9: blueVal = 9
         colorStr = str(int(redVal)) + str(int(greVal)) + str(int(blueVal))
         return colorStr
