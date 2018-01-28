@@ -61,55 +61,77 @@ class Emotions:
         return self.calc_friend_score()
 
     def get_rest(self):
-        rest_mod = random.randint(1, 5)
-        hun_val = -10 - rest_mod
-        hap_val = 7 + rest_mod
-        dis_val = -7 - rest_mod
-        self.mod_hun(hun_val)
-        self.mod_hap(hap_val)
-        fri_val = self.mod_dis(dis_val)
-        self.history.append("r")
-        return fri_val
+        if self.discipline_test():
+            rest_mod = random.randint(1, 5)
+            hun_val = -10 - rest_mod
+            hap_val = 7 + rest_mod
+            dis_val = -7 - rest_mod
+            self.mod_hun(hun_val)
+            self.mod_hap(hap_val)
+            fri_val = self.mod_dis(dis_val)
+            self.history.append("r")
+            return fri_val
+        else:
+            return self.mod_dis(0)
 
     def get_feed(self):
-        feed_mod = random.randint(1, 5)
-        hun_val = 10 + feed_mod
-        hap_val = 8 + feed_mod
-        dis_val = -4 - feed_mod
-        self.mod_hun(hun_val)
-        self.mod_hap(hap_val)
-        fri_val = self.mod_dis(dis_val)
-        self.history.append("f")
-        return fri_val
+        if self.discipline_test():            
+            feed_mod = random.randint(1, 5)
+            hun_val = 10 + feed_mod
+            hap_val = 8 + feed_mod
+            dis_val = -4 - feed_mod
+            self.mod_hun(hun_val)
+            self.mod_hap(hap_val)
+            fri_val = self.mod_dis(dis_val)
+            self.history.append("f")
+            return fri_val
+        else:
+            return self.mod_dis(0)
 
     def get_play(self):
-        play_mod = random.randint(1, 5)
-        hap_val = 10 + play_mod
-        hun_val = -10 - play_mod
-        self.mod_hap(hap_val)
-        self.mod_hun(hun_val)
-        fri_val = self.mod_hun(hun_val)
-        self.history.append("p")
-        return fri_val
+        if self.discipline_test():
+            play_mod = random.randint(1, 5)
+            hap_val = 10 + play_mod
+            hun_val = -10 - play_mod
+            self.mod_hap(hap_val)
+            self.mod_hun(hun_val)
+            fri_val = self.mod_hun(hun_val)
+            self.history.append("p")
+            return fri_val
+        else:
+            return self.mod_dis(0)
 
     def get_train(self):
-        train_mod = random.randint(1, 5)
-        dis_val = 10 + train_mod
-        hun_val = -7 - train_mod
-        hap_val = -3 + train_mod
-        self.mod_hap(hap_val)
-        self.mod_hun(hun_val)
-        fri_val = self.mod_dis(dis_val)
-        self.history.append("t")
-        return fri_val
+        if self.discipline_test():
+            train_mod = random.randint(1, 5)
+            dis_val = 10 + train_mod
+            hun_val = -7 - train_mod
+            hap_val = -3 + train_mod
+            self.mod_hap(hap_val)
+            self.mod_hun(hun_val)
+            fri_val = self.mod_dis(dis_val)
+            self.history.append("t")
+            return fri_val
+        else:
+            return self.mod_dis(0)
 
     def get_heal(self):
-        heal_mod = random.randint(1, 5)
-        sic_val = 10 + heal_mod
-        dis_val = 5 + heal_mod
-        hap_val = -3 - heal_mod
-        self.mod_sic(sic_val)
-        self.mod_dis(dis_val)
-        fri_val = self.mod_hap(hap_val)
-        self.history.append("h")
-        return fri_val
+        if self.discipline_test():                
+            heal_mod = random.randint(1, 5)
+            sic_val = 10 + heal_mod
+            dis_val = 5 + heal_mod
+            hap_val = -3 - heal_mod
+            self.mod_sic(sic_val)
+            self.mod_dis(dis_val)
+            fri_val = self.mod_hap(hap_val)
+            self.history.append("h")
+            return fri_val
+        else:
+            return self.mod_hun(0)
+
+    def discipline_test(self):
+        ran = random.randint(1, 100)
+        if ran > self.calc_obed_score():
+            return False
+        else:
+            return True
