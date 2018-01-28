@@ -4,6 +4,10 @@ from emotions import Emotions
 app = Flask(__name__)
 
 app.emotions = Emotions()
+@app.route('/get_fri')
+def get_fri():
+    fri_val = app.emotions.calc_friend_score()
+    return jsonify({'result':fri_val})
 
 @app.route('/get_rest')
 def get_rest():

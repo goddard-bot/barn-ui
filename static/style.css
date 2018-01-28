@@ -1,6 +1,16 @@
+a {
+    margin: 5px;
+}
 a:link {
     color: white;
+    font-size: 1.5em;
 }
 a:visited {
     color: white;
+}
+h1 {
+    font-size: 2em;
+}
+body {
+    font-size: 4em;
 }

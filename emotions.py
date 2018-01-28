@@ -27,6 +27,9 @@ class Emotions:
             self.dis = self.dis * 2
         fri = ((self.hap * 4) - (self.hun * 0.5) + (self.dis * 0.5) - (self.sic * 0.5)) * self.boredom
         self.boredom = 1
+
+        if fri < 0:
+            return 0
         return fri
 
     def calc_obed_score(self):
