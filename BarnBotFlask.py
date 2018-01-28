@@ -1,26 +1,63 @@
 from flask import Flask, jsonify, render_template, request
 import random
-import TextRobo
+import GoddardBot
 
 app = Flask(__name__)
 
-app.hap, app.hun, app.dis, app.sic = TextRobo.init_emots()
-app.fri = TextRobo.calc_friend(app.hap, app.hun, app.dis, app.sic)
+app.emotions = GoddardBot.Emotions()
 
-@app.route('/getRest')
+@app.route('/get_rest')
 def get_rest():
-    app.hap += 5
-    return jsonify(result=app.hap)
+    rest_mod = random.randint(1, 5)
+    hun_val = -10 - rest_mod
+    hap_val = 7 + rest_mod
+    dis_val = -7 - rest_mod
+    app.emotions.mod_hun(hun_val)
+    app.emotions.mod_hap(hap_val)
+    fri_val = app.emotions.mod_dis(dis_val)
+    return jsonify({'result':fri_val})
 
-@app.route('/getFeed')
+@app.route('/get_feed')
 def get_feed():
-    a = random.randint(1, 20)
-    return jsonify(result=a)
+    feed_mod = random.randint(1,5)
+    hun_val = 10 + feed_mod
+    hap_val = 8 + feed_mod
+    dis_val = -4 - feed_mod
+    app.emotions.mod_hun(hun_val)
+    app.emotions.mod_hap(hap_val)
+    fri_val = app.emotions.mod_dis(dis_val)
+    return jsonify({'result':fri_val})
 
-@app.route('/getPlay')
+@app.route('/get_play')
 def get_play():
-    a = 7
-    return jsonify(result=a)
+    play_mod = random.randint(1, 5)
+    hap_val = 10 + play_mod
+    hun_val = -10 - play_mod
+    app.emotions.mod_hap(hap_val)
+    fri_val = app.emotions.mod_hun(hun_val)
+    return jsonify({'result':fri_val})
+
+@app.route('/get_train')
+def get_train():
+    train_mod = random.randint(1, 5)
+    dis_val = 10 + train_mod
+    hun_val = -7 - train_mod
+    hap_val = -3 + train_mod
+    app.emotions.mod_hap(hap_val)
+    app.emotions.mod_hun(hun_val)
+    fri_val = app.emotions.mod_dis(dis_val)
+    return jsonify({'result':fri_val})
+
+@app.route('/get_heal')
+def get_heal():
+    heal_mod = random.randint(1, 5)
+    sic_val = 10 + heal_mod
+    dis_val = 5 + heal_mod
+    hap_val = -3 - heal_mod
+    app.emotions.mod_sic(sic_val)
+    app.emotions.mod_dis(dis_val)
+    fri_val = app.emotions.mod_hap(hap_val)
+    return jsonify({'result':fri_val})
 
 @app.route('/')
 def index():
