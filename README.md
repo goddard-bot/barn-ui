@@ -1,31 +1,32 @@
-# Brickhack 4: BARN
+# Brickhack 4: Goddard
 
 ## Robot
 
 ##### Movement: ####
 * Go forward
 * Spin
-* Stuff we can throw at the arduino to move
+ * clockwise
+ * counter clockwise
+* Reverse
 
 ##### Friendship: ####
-* some int that depends on stats
+* Effects if the robot will actually follow your commands
 
 ##### Emotions: ####
 * hunger
 * happiness
 * discipline
 * sickness
-* age
+* bordem
 
 #### Interactions ####
 * feed - raises happiness and hunger stat
-* give medicine - raise discipline, decrease sickness
-* move
+* heal - increases happiness and sickness, decreases discipline
+* train - movement commands (randomly assigns if Goddard will actually move)
   * forward
   * turn
     * left
     * right
   * backward
-* rest  -
-* play game (raises happiness)
-* " " breaks out of the loop (enter twice)
+* rest - decreases hunger, increases happiness
+* play - spin command, increases happiness or something, decreases hunger or something
