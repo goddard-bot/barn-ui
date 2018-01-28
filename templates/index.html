@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>siteTest</title>
+</head>
+<body>
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')
+</script>
+
+<script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+    function action(cmd) {
+        $.getJSON($SCRIPT_ROOT + "/get_" + cmd, {}, function (data) {
+            $("#FriRes").text(data.result);
+        });
+        return false;
+    }
+
+    $(function () {
+        $('a#rest').bind('click', function () {
+            action("rest")
+        });
+    });
+    $(function () {
+        $('a#feed').bind('click', function () {
+            action("feed")
+        });
+    });
+    $(function () {
+        $('a#play').bind('click', function () {
+            action("play")
+        });
+    });
+    $(function () {
+        $('a#heal').bind('click', function () {
+            action("heal")
+        });
+    });
+    $(function () {
+        $('a#train').bind('click', function () {
+            action("train")
+        });
+    });
+
+</script>
+
+<h1>Robo</h1>
+<p>
+    Friendship: <span id="FriRes">Friendship</span>
+</p>
+<a href=# id=feed>Feed</a>
+<a href=# id=rest>Rest</a>
+<a href=# id=play>Play</a>
+<a href=# id=heal>Heal</a>
+<a href=# id=train>Train</a>
+</body>
+</html>
