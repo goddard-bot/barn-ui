@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>siteTest</title>
+</head>
+<body>
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+        window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')
+    </script>
+
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        function action (cmd) {
+            $.getJSON($SCRIPT_ROOT + cmd, {}, function(data) {
+                $("#restRes").text(data.result);
+            });
+            return false;
+        }
+        $(function() {
+            $('a#rest').bind('click', action("Rest"));
+        });
+        $(function() {
+            $('a#feed').bind('click', action("Feed"));
+        });
+        $(function() {
+            $('a#play').bind('click', action('Play'));
+        });
+    </script>
+
+    <h1>Robo</h1>
+    <p>
+        <span id=restRes>Rest?</span>
+        <span id=feedRes>Feed?</span>
+        <span id=playRes>Play?</span>
+    </p>
+    <a href=# id=feed class="results">feed</a>
+    <a href=# id=rest class="results">rest</a>
+    <a href=# id=play class="results">play</a>
+</body>
+</html>
