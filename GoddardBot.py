@@ -1,5 +1,6 @@
 import random
 from collections import Counter
+import serialBot
 
 class Emotions:
     hap = random.randint(1, 100)
@@ -70,12 +71,14 @@ class Emotions:
             self.mod_hap(hap_val)
             fri_val = self.mod_dis(dis_val)
             self.history.append("r")
+            color =  self.find_color(fri_val)
+            serialBot.sleep(color)
             return fri_val
         else:
             return self.mod_dis(0)
 
     def get_feed(self):
-        if self.discipline_test():            
+        if self.discipline_test():
             feed_mod = random.randint(1, 5)
             hun_val = 10 + feed_mod
             hap_val = 8 + feed_mod
@@ -84,6 +87,8 @@ class Emotions:
             self.mod_hap(hap_val)
             fri_val = self.mod_dis(dis_val)
             self.history.append("f")
+            color =  self.find_color(fri_val)
+            serialBot.yep(color)
             return fri_val
         else:
             return self.mod_dis(0)
@@ -97,6 +102,8 @@ class Emotions:
             self.mod_hun(hun_val)
             fri_val = self.mod_hun(hun_val)
             self.history.append("p")
+            color =  self.find_color(fri_val)
+            serialBot.spin(color)
             return fri_val
         else:
             return self.mod_dis(0)
@@ -111,12 +118,17 @@ class Emotions:
             self.mod_hun(hun_val)
             fri_val = self.mod_dis(dis_val)
             self.history.append("t")
+            color = self.find_color(fri_val)
+            if random.randint(1, 2) == 1:
+                serialBot.go_forward(color, self.calc_obed_score()//10)
+            else:
+                serialBot.reverse(color, self.calc_obed_score()//10)
             return fri_val
         else:
             return self.mod_dis(0)
 
     def get_heal(self):
-        if self.discipline_test():                
+        if self.discipline_test():
             heal_mod = random.randint(1, 5)
             sic_val = 10 + heal_mod
             dis_val = 5 + heal_mod
@@ -125,6 +137,8 @@ class Emotions:
             self.mod_dis(dis_val)
             fri_val = self.mod_hap(hap_val)
             self.history.append("h")
+            color = self.find_color(fri_val)
+            serialBot.yep(color)
             return fri_val
         else:
             return self.mod_hun(0)
@@ -132,6 +146,19 @@ class Emotions:
     def discipline_test(self):
         ran = random.randint(1, 100)
         if ran > self.calc_obed_score():
+            color = self.find_color()
+            serialBot.get_mad(color)
             return False
         else:
             return True
+
+    def find_color(self, fri_val):
+        if self.hap > 50:
+            greVal = self.hap//7
+            redVal = 1
+        else:
+            redVal = (self.hap-50)//7
+            greVal = 1
+        blueVal = self.calc_obed_score()//7
+        colorStr = str(int(redVal)) + str(int(greVal)) + str(int(blueVal))
+        return colorStr
