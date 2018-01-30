@@ -30,3 +30,5 @@
   * backward
 * rest - decreases hunger, increases happiness
 * play - spin command, increases happiness or something, decreases hunger or something
+
+[Read more about our project here!](https://devpost.com/software/goddard-robot-pet-with-a-genuine-people-personality)
